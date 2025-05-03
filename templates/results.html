@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Laptop Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            padding: 2rem;
+            padding-bottom: 80px; /* space for back button */
+        }
+
+        /* Container for the table with overflow and scrolling */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            min-width: 800px;
+            table-layout: auto;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+            font-weight: bold;
+            top: 0;
+            z-index: 1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Column specific styling */
+        .name-column {
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Center the title */
+        h1 {
+            text-align: center;
+            margin-top: 0;
+        }
+
+        /* Back to search button */
+        .back-button {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: sans-serif;
+            z-index: 1000;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>{{ sort_label }}</h1>
+
+        {% if laptops %}
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        {% for col in columns %}
+                            <th>{{ col.replace('_', ' ')|capitalize }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in laptops %}
+                    <tr>
+                        {% for value in row %}
+                            {% set idx = loop.index0 %}
+                            <td class="{% if columns[idx] == 'name' %}name-column{% endif %}">
+                                {% if columns[idx] == 'price' %}
+                                    ${{ '%.2f' % value }}
+                                {% elif columns[idx] == 'link' %}
+                                    <a href="{{ value }}" target="_blank">View Laptop</a>
+                                {% else %}
+                                    {{ value }}
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <p>No laptops match your filters.</p>
+        {% endif %}
+    </div>
+
+    <a href="/" class="back-button">← Back to Search</a>
+</body>
+</html>

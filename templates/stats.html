@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+        }
+
+        /* Center the title */
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;  /* Space between title and the rest */
+        }
+
+        /* Style for dropdown container */
+        .dropdown {
+            margin-bottom: 30px;  /* More space between dropdowns and graphs */
+            text-align: center;
+        }
+
+        /* Style for dropdown label to make it larger like a header */
+        .dropdown label {
+            font-size: 20px;   /* Make the label text larger */
+            font-weight: bold; /* Bold the label for emphasis */
+            display: block;    /* Ensure the label appears on a separate line */
+            margin-bottom: 10px; /* Space between label and dropdown */
+        }
+
+        /* Style for dropdown itself */
+        .dropdown select {
+            padding: 10px;
+            font-size: 18px;  /* Larger font for dropdown text */
+            width: 200px;     /* Control the width of the dropdown */
+        }
+
+        .graph-container {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .graph-container img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Add more space between the first graph and the second dropdown */
+        .second-dropdown {
+            margin-top: 60px;  /* Add extra space between the first graph and the second dropdown */
+        }
+    </style>
+</head>
+<body>
+    <!-- Centered Title -->
+    <h1>Laptop Statistics</h1>
+
+    <!-- Dropdown for selecting categorical graphs -->
+    <div class="dropdown">
+        <label for="graphSelect">Average User Rating by:</label>
+        <select id="graphSelect" onchange="showGraph()">
+            <option value="brand">Brand</option>
+            <option value="type">Type</option>
+            <option value="os">Operating System</option>
+        </select>
+    </div>
+
+    <div id="brandGraph" class="graph-container">
+        <img src="data:image/png;base64,{{ brand_graph }}" alt="Brand Graph" />
+    </div>
+    <div id="typeGraph" class="graph-container">
+        <img src="data:image/png;base64,{{ type_graph }}" alt="Type Graph" />
+    </div>
+    <div id="osGraph" class="graph-container">
+        <img src="data:image/png;base64,{{ os_graph }}" alt="OS Graph" />
+    </div>
+
+    <!-- Dropdown for selecting average price comparisons -->
+    <div class="dropdown second-dropdown">
+        <label for="avgPriceSelect">Average Price by:</label>
+        <select id="avgPriceSelect" onchange="showAvgPriceGraph()">
+            <option value="brand">Brand</option>
+            <option value="type">Type</option>
+            <option value="os">Operating System</option>
+        </select>
+    </div>
+
+    <div id="avgPriceBrandGraph" class="graph-container">
+        <img src="data:image/png;base64,{{ brand_price_graph }}" alt="Avg Price by Brand" />
+    </div>
+    <div id="avgPriceTypeGraph" class="graph-container">
+        <img src="data:image/png;base64,{{ type_price_graph }}" alt="Avg Price by Type" />
+    </div>
+    <div id="avgPriceOSGraph" class="graph-container">
+        <img src="data:image/png;base64,{{ os_price_graph }}" alt="Avg Price by OS" />
+    </div>
+
+    <script>
+        function showGraph() {
+            document.getElementById("brandGraph").style.display = "none";
+            document.getElementById("typeGraph").style.display = "none";
+            document.getElementById("osGraph").style.display = "none";
+
+            var selected = document.getElementById("graphSelect").value;
+            document.getElementById(selected + "Graph").style.display = "block";
+        }
+
+        function showAvgPriceGraph() {
+            document.getElementById("avgPriceBrandGraph").style.display = "none";
+            document.getElementById("avgPriceTypeGraph").style.display = "none";
+            document.getElementById("avgPriceOSGraph").style.display = "none";
+
+            var selected = document.getElementById("avgPriceSelect").value;
+            var key = selected === "os" ? "OS" : selected.charAt(0).toUpperCase() + selected.slice(1);
+            document.getElementById("avgPrice" + key + "Graph").style.display = "block";
+        }
+
+        // Set default graphs to display
+        showGraph();
+        showAvgPriceGraph();
+    </script>
+
+    <a href="/" class="back-button">← Back to Search</a>
+</body>
+</html>
