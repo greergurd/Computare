@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: computare
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: |
+      apt-get update && apt-get install -y build-essential python3-dev
+      pip install -r requirements.txt
+    startCommand: gunicorn app:app
