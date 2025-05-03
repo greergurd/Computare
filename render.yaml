@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: computare
-    env: docker
-    region: oregon
-    plan: free
-    dockerfilePath: ./Dockerfile
