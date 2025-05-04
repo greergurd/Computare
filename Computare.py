@@ -161,10 +161,9 @@ def results():
         if 'touchscreen' in col_idx:
             row[col_idx['touchscreen']] = BOOLEAN_MAP.get(row[col_idx['touchscreen']], row[col_idx['touchscreen']])
 
-        # Modify the laptop name to remove everything after the first hyphen
         if 'name' in col_idx:
             name = row[col_idx['name']]
-            # Truncate the name to everything before the first hyphen
+
             row[col_idx['name']] = name.split(" -")[0] if " - " in name else name
 
         mapped_rows.append(row)
