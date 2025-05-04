@@ -55,8 +55,8 @@ http://localhost:8000
 # Preview of Computare
 ![Search Page](images/SearchPic.png)
 
+![Results Page](images/ResultsPic.png)
+
 ![Statistics Page p1](images/StatsPic1.png)
 
 ![Statistics Page p2](images/StatsPic2.png)
-
-![Results Page](images/ResultsPic.png)
