@@ -35,10 +35,11 @@ Make sure you have:
 
 ---
 
-### 1. Clone the Repository
+### 1. Clone the Repository 
 ```bash
 git clone https://github.com/your-username/computare.git
 cd computare
+```
 
 ### 2. Install Dependencies
 pip install flask pandas matplotlib
