@@ -49,3 +49,12 @@ python Computare.py
 
 ### 4. Open in Browser
 http://localhost:8000
+
+---
+
+# Preview of Computare
+![Search Page](images/SearchPic.png)
+
+![Statistics Page](images/StatPic1.png)(images/StatPic2.png)
+
+![Results Page](images/ResultsPic.png)
